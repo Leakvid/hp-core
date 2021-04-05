@@ -1,18 +1,6 @@
 name: HPCore
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [master]
-    paths: ['HPCore/**']
-  pull_request:
-    branches: [master]
-    paths: ['HPCore/**']
-  
-
-defaults:
-  run:
-    working-directory: HPCore
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
