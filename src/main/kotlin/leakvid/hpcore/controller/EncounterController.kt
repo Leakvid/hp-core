@@ -7,25 +7,39 @@ import leakvid.hpcore.domain.Skill
 import leakvid.hpcore.domain.enumtypes.DamageType
 import leakvid.hpcore.domain.enumtypes.ResistanceType
 import leakvid.hpcore.services.IEncounterService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@CrossOrigin //TODO fix security issues
+@CrossOrigin
 @RequestMapping("/encounter")
 class EncounterController(val service: IEncounterService) {
     @GetMapping
-    fun getAll(): List<Encounter?>? {
-        return service.getAll()
+    fun getAll(): ResponseEntity<List<Encounter>> {
+        val list = service.getAll()
+
+        return if (list == null) {
+            ResponseEntity.notFound().build();
+        }else{
+            ResponseEntity.ok(list)
+        }
     }
 
-    @GetMapping("/name")
-    fun get(name: String): Encounter? {
-        return service.get(name)
+    @GetMapping("/{name}")
+    fun get(@PathVariable("name") name: String): ResponseEntity<Encounter> {
+        val encounter = service.get(name)
+
+        return if (encounter == null) {
+            ResponseEntity.notFound().build();
+        }else{
+            ResponseEntity.ok(encounter)
+        }
     }
 
     @PostMapping
-    fun insert(@RequestBody encounter: Encounter){
+    fun insert(@RequestBody encounter: Encounter): ResponseEntity<Encounter>{
         service.merge(encounter)
+        return ResponseEntity.ok().build()
     }
 
     @GetMapping("/test")
