@@ -7,9 +7,6 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication(exclude = [MongoAutoConfiguration::class, MongoDataAutoConfiguration::class])
-@ComponentScan(basePackages = arrayOf("leakvid.hpcore.controller",
-									  "leakvid.hpcore.services",
-									  "leakvid.hpcore"))
 class App
 
 fun main(args: Array<String>) {
