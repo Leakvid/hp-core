@@ -17,14 +17,14 @@ jobs:
     - name: 'Checkout Github Action'
       uses: actions/checkout@master
 
-
     - name: Set up Java version
       uses: actions/setup-java@v1
       with:
         java-version: '11'
-
-    - name: Build with Maven
-      run: mvn clean install
+    
+    - run: chmod +x ./gradlew
+    - name: Build with Gradle
+      run: ./gradlew build
 
     - name: Run Azure webapp deploy action using publish profile credentials
       uses: azure/webapps-deploy@v2
@@ -32,5 +32,5 @@ jobs:
         app-name: homebrewery-core
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3D0AF285B73A41059150C0DAF7EF257B }}
-        package: ${{ github.workspace }}/target/*.jar
+        package: ${{ github.workspace }}/build/libs/*.jar
 
