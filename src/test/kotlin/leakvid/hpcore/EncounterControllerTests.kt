@@ -6,6 +6,7 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.verify
+import leakvid.hpcore.controller.EncounterController
 import leakvid.hpcore.domain.Action
 import leakvid.hpcore.domain.Encounter
 import leakvid.hpcore.domain.Feature
@@ -25,7 +26,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 @ExtendWith(SpringExtension::class)
-@WebMvcTest(Encounter::class)
+@WebMvcTest(EncounterController::class)
 @AutoConfigureMockMvc(addFilters = false)
 class EncounterControllerTests {
 
